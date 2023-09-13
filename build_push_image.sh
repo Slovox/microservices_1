@@ -8,7 +8,7 @@ docker images
 docker tag item-app franda/item-app:1.0
 
 # Login ke Docker Hub
-docker login
+echo $PASSWORD_DOCKER_HUB | docker login -u franda --password-stdin
 
 # Push image ke Docker hub #
 docker push franda/item-app:1.0            
