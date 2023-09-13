@@ -1,16 +1,30 @@
 version: '2.15.1'
 services:
   item-app:
-    image: franda/item-app
+    image: franda/item-app:1.0
     ports:
-      - "8080:80"
+      - "80:8080"
+    networks:
+      - item-app-net
     depends_on:
       - item-db
+    restart: on-failure
 
   item-db: 
+    container_name: item-db
     image: mongo:3
+    ports:
+      - "27017:27017"
     volumes:
       - app-db:/data/db
+    networks:
+      - item-app-net
 
 volumes:
   app-db:
+    name: app-db
+
+networks:
+  item-app-net:
+    name: item-app-net
+    driver: bridge
